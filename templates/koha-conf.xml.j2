@@ -1,0 +1,65 @@
+<yazgfs>
+ <config>
+  <db_scheme>mysql</db_scheme>
+  <database>{{ koha_db_database }}</database>
+  <hostname>{{ koha_db_hostname }}</hostname>
+  <port>3306</port>
+  <user>{{ koha_db_user }}</user>
+  <pass>{{ koha_db_pass }}</pass>
+  <biblioserver>biblios</biblioserver>
+  <biblioservershadow>1</biblioservershadow>
+  <authorityserver>authorities</authorityserver>
+  <authorityservershadow>1</authorityservershadow>
+  <pluginsdir>/var/lib/koha/{{ koha_instance_name }}/plugins</pluginsdir>
+  <enable_plugins>{{ koha_enable_plugins }}</enable_plugins>
+  <upload_path>/var/lib/koha/{{ koha_instance_name }}/uploads</upload_path>
+  <tmp_path>/var/lib/koha/{{ koha_instance_name }}/tmp</tmp_path>
+  <intranetdir>/usr/share/koha/intranet/cgi-bin</intranetdir>
+  <opacdir>/usr/share/koha/opac/cgi-bin/opac</opacdir>
+  <opachtdocs>/usr/share/koha/opac/htdocs/opac-tmpl</opachtdocs>
+  <intrahtdocs>/usr/share/koha/intranet/htdocs/intranet-tmpl</intrahtdocs>
+  <includes>/usr/share/koha/intranet/htdocs/intranet-tmpl/prog/en/includes/</includes>
+  <logdir>/var/log/koha/{{ koha_instance_name }}</logdir>
+  <docdir>/usr/share/doc/koha-common</docdir>
+  <backupdir>/var/spool/koha/{{ koha_instance_name }}</backupdir>
+  <mana_config>https://mana-kb.koha-community.org</mana_config>
+  <backup_db_via_tools>0</backup_db_via_tools>
+  <backup_conf_via_tools>0</backup_conf_via_tools>
+  <install_log>/usr/share/koha/misc/koha-install-log</install_log>
+  <useldapserver>0</useldapserver>
+  <useshibboleth>0</useshibboleth>
+  <zebra_lockdir>/var/lock/koha/{{ koha_instance_name }}</zebra_lockdir>
+  <use_zebra_facets>1</use_zebra_facets>
+  <zebra_max_record_size>1024</zebra_max_record_size>
+  <queryparser_config>/etc/koha/searchengine/queryparser.yaml</queryparser_config>
+  <log4perl_conf>/etc/koha/sites/{{ koha_instance_name }}/log4perl.conf</log4perl_conf>
+  <memcached_servers>127.0.0.1:11211</memcached_servers>
+  <memcached_namespace>koha_{{ koha_instance_name }}</memcached_namespace>
+  <template_cache_dir>/var/cache/koha/{{ koha_instance_name }}/templates</template_cache_dir>
+  <api_secret_passphrase>{{ koha_api_secret }}</api_secret_passphrase>
+  <ttf>
+     <font type="TR" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSerif.ttf</font>
+     <font type="TB" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSerif-Bold.ttf</font>
+     <font type="TI" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSerif-Italic.ttf</font>
+     <font type="TBI">/usr/share/fonts/truetype/ttf-dejavu/DejaVuSerif-BoldItalic.ttf</font>
+     <font type="C"  >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf</font>
+     <font type="CB" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono-Bold.ttf</font>
+     <font type="CO" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono-Oblique.ttf</font>
+     <font type="CBO">/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono-BoldOblique.ttf</font>
+     <font type="H"  >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf</font>
+     <font type="HO" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Oblique.ttf</font>
+     <font type="HB" >/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf</font>
+     <font type="HBO">/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-BoldOblique.ttf</font>
+  </ttf>
+  <sms_send_config>/etc/koha/sites/{{ koha_instance_name }}/sms_send/</sms_send_config>
+  <plack_max_requests>{{ koha_plack_max_requests }}</plack_max_requests>
+  <plack_workers>{{ koha_plack_workers }}</plack_workers>
+  <elasticsearch>
+   <server>{{ koha_elasticsearch_server }}:9200</server>
+   <index_name>koha_{{ koha_instance_name }}</index_name>
+  </elasticsearch>
+  <timezone></timezone>
+  <dev_install>0</dev_install>
+  <strict_sql_modes>0</strict_sql_modes>
+ </config>
+</yazgfs>

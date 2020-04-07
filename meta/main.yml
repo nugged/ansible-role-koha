@@ -1,0 +1,14 @@
+galaxy_info:
+  role_name: koha
+  description: Debian package based Koha installation
+  author: Joonas Kylmälä
+  company: University of Helsinki
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Debian
+      versions:
+        - 9
+  galaxy_tags:
+    - koha
+dependencies: []
