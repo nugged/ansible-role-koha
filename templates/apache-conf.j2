@@ -1,0 +1,35 @@
+<VirtualHost *:80>
+  ServerName {{ koha_domain }}
+  Redirect permanent / https://{{ koha_domain }}/
+</VirtualHost>
+
+<VirtualHost *:443>
+  Define instance "{{ koha_instance_name }}"
+
+  Include /etc/koha/apache-shared.conf
+  Include /etc/koha/apache-shared-intranet-plack.conf
+  Include /etc/koha/apache-shared-intranet.conf
+
+  SetEnv KOHA_CONF "/etc/koha/sites/{{ koha_instance_name }}/koha-conf.xml"
+  AssignUserID {{ koha_instance_name }}-koha {{ koha_instance_name }}-koha
+
+  SSLEngine on
+  SSLCertificateFile "{{ koha_ssl_cert }}"
+  SSLCertificateKeyFile "{{ koha_ssl_cert_priv_key }}"
+
+  ServerName {{ koha_domain }}
+  ErrorLog /var/log/koha/{{ koha_instance_name }}/intranet-error.log
+</VirtualHost>
+
+<VirtualHost *:210>
+  AssignUserID {{ koha_instance_name }}-koha {{ koha_instance_name }}-koha
+
+  SSLEngine on
+  SSLCertificateFile "{{ koha_ssl_cert }}"
+  SSLCertificateKeyFile "{{ koha_ssl_cert_priv_key }}"
+
+  ServerName {{ koha_domain }}
+  ProxyPass / http://127.0.0.1:2100/
+
+  ErrorLog /var/log/koha/{{ koha_instance_name }}/sru-apache-error.log
+</VirtualHost>

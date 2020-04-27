@@ -6,6 +6,9 @@ koha_signing_key_id: "3EA44636DBCE457DA2CF8D823C9356BBA2E41F10"
 koha_keyserver: "keyserver.ubuntu.com"
 koha_package_repository: "deb http://debian.koha-community.org/koha unstable main"
 koha_instance_name: "example"
+koha_domain: "example.com"
+koha_ssl_cert: /etc/ssl/certs/ssl-cert-snakeoil.pem
+koha_ssl_cert_priv_key: /etc/ssl/private/ssl-cert-snakeoil.key
 koha_api_secret: CHANGE_ME
 koha_db_user: CHANGE_ME
 koha_db_pass: CHANGE_ME

@@ -36,6 +36,15 @@
   register: plack_result
   changed_when: '"Plack enabled for" in plack_result.stdout'
 
+- name: Configure apache2
+  template:
+    src: apache-conf.j2
+    dest: /etc/apache2/sites-enabled/{{ koha_instance_name }}.conf
+    owner: root
+    group: "{{ koha_instance_name }}-koha"
+    mode: u=rw,g=r
+  register: apache_conf
+
 - name: Restart koha-common
   systemd:
     state: restarted
@@ -57,10 +66,11 @@
     - cgi
     - headers
     - proxy_http
+    - ssl
   register: apache_modules
 
 - name: Restart Apache
   systemd:
     name: apache2
     state: restarted
-  when: apache_modules.changed or plack_result.changed
+  when: apache_modules.changed or plack_result.changed or apache_conf.changed
