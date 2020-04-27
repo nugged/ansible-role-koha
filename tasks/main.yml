@@ -9,13 +9,13 @@
     state: present
     filename: koha-packages
 
- - name: Install Koha packages
-   package:
-     name: "{{ item }}"
-     state: present
-   loop:
-     - koha-common
-     - koha-elasticsearch
+- name: Install Koha packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - koha-common
+    - koha-elasticsearch
 
 - name: Create Koha instance
   command: koha-create {{ koha_instance_name }} --use-db --database {{ koha_db_database }}
