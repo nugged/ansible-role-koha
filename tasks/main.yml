@@ -45,8 +45,8 @@
 - name: Enable Plack
   command: koha-plack --enable {{ koha_instance_name }}
   ignore_errors: true
-  register: plack_result
-  changed_when: '"Plack enabled for" in plack_result.stdout'
+  register: koha_plack_result
+  changed_when: '"Plack enabled for" in koha_plack_result.stdout'
 
 - name: Configure apache2
   template:
@@ -73,4 +73,4 @@
   systemd:
     name: apache2
     state: restarted
-  when: apache_modules.changed or plack_result.changed or apache_conf.changed
+  when: apache_modules.changed or koha_plack_result.changed or apache_conf.changed
