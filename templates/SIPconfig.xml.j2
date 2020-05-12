@@ -1,0 +1,44 @@
+<acsconfig xmlns="http://openncip.org/acs-config/1.0/">
+  <error-detect enabled="true" />
+  <server-params
+      min_servers='10'
+      min_spare_servers='1'
+      log_file='Sys::Syslog'
+      syslog_ident='koha_sip'
+      syslog_facility='local6' />
+  <listeners>
+    <service
+	port="127.0.0.1:{{ koha_sip_port }}/tcp"
+	transport="RAW"
+	protocol="SIP/2.00"
+	client_timeout="600"
+	timeout="65" />
+  </listeners>
+  <accounts>
+{% for account in koha_sip_accounts %}
+    <login
+	id="{{ account.username }}"
+	password="{{ account.password }}"
+	delimeter="|"
+	error-detect="enabled"
+	institution="{{ account.institution }}"
+	encoding="utf8"
+	checked_in_ok="1"
+	terminator="CR"
+	send_patron_home_library_in_af="1" />
+{% endfor %}
+  </accounts>
+  <institutions>
+{% for institution in koha_sip_institutions %}
+    <institution id="{{ institution }}" implementation="ILS" parms="">
+      <policy checkin="true"
+	      renewal="true"
+	      checkout="true"
+	      status_update="true"
+	      offline="false"
+	      timeout="100"
+	      retries="5" />
+    </institution>
+{% endfor %}
+  </institutions>
+</acsconfig>

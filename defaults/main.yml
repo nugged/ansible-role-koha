@@ -15,3 +15,11 @@ koha_db_pass: CHANGE_ME
 koha_db_database: CHANGE_ME
 koha_db_hostname: CHANGE_ME
 koha_create_instance: false
+
+koha_sip_enable: false
+koha_sip_port: 6002
+koha_sip_accounts:
+  - username: testuser
+    password: testpassword
+    institution: testinstitution
+koha_sip_institutions: "{{ koha_sip_accounts | json_query('[*].institution') | unique }}"

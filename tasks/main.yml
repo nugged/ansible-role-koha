@@ -57,11 +57,27 @@
     mode: u=rw,g=r
   register: apache_conf
 
+- name: Configure SIPconfig.xml
+  template:
+    src: SIPconfig.xml.j2
+    dest: /etc/koha/sites/{{ koha_instance_name }}/SIPconfig.xml
+    owner: root
+    group: "{{ koha_instance_name }}-koha"
+    mode: u=rw,g=r
+  register: koha_sip_conf
+  when: koha_sip_enable
+
+- name: Enable SIP server
+  command: koha-enable-sip {{ koha_instance_name }}
+  register: koha_sip_result
+  changed_when: '"SIP already enabled for" not in koha_sip_result.stdout'
+  when: koha_sip_enable
+
 - name: Restart koha-common
   systemd:
     state: restarted
     name: koha-common
-  when: koha_conf.changed
+  when: koha_conf.changed or koha_sip_conf
 
 - name: Restart memcached
   systemd:
