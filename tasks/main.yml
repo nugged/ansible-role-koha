@@ -77,7 +77,7 @@
   systemd:
     state: restarted
     name: koha-common
-  when: koha_conf.changed or koha_sip_conf
+  when: koha_conf.changed or koha_sip_conf.changed or koha_sip_result.changed
 
 - name: Restart memcached
   systemd:
