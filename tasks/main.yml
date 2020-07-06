@@ -63,6 +63,21 @@
     mode: u=rw,g=r
   register: koha_conf
 
+- name: Check for fi-FI translation
+  command: MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE=KOHA koha-translate --list
+  failed_when: False
+  register: koha_installed_translations
+  changed_when: '"fi-FI" not in koha_installed_translations.stdout'
+  when: koha_install_fi_translation
+
+- name: Install fi-FI translation
+  shell: "MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE=KOHA koha-translate --install fi-FI || MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE=KOHA koha-translate --update fi-FI"
+  when: koha_install_fi_translation and koha_installed_translations.changed
+  register: koha_lng_install
+
+  # TODO: might be another action for "update" if installed:
+  # koha-translate --update fi-FI 
+
 - name: Enable Plack
   command: koha-plack --enable {{ koha_instance_name }}
   register: koha_plack_result
