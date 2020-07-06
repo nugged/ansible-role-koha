@@ -22,6 +22,13 @@
     - koha-common
     - koha-elasticsearch
 
+- name: Check to have {{ koha_domain }} domain in /etc/hosts
+  become: yes
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.1.1 {{ koha_domain }}"
+    state: present
+
 - name: Enable required Apache modules
   apache2_module:
     name: "{{ item }}"
