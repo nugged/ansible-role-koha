@@ -56,9 +56,11 @@
 
 - name: Enable Plack
   command: koha-plack --enable {{ koha_instance_name }}
-  ignore_errors: true
   register: koha_plack_result
-  changed_when: '"Plack enabled for" in koha_plack_result.stdout'
+  failed_when:
+    - koha_plack_result.rc != 0
+    - '"Plack already enabled for" not in koha_plack_result.stderr'
+  changed_when: '"Plack already enabled for" not in koha_plack_result.stderr'
 
 - name: Configure apache2
   template:
