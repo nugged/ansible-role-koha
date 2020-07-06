@@ -1,3 +1,8 @@
+- name: Set server timezone to {{ koha_server_timezone }}
+  timezone:
+    name: "{{ koha_server_timezone }}"
+  when: koha_server_timezone|default(False)|bool
+
 - name: Add Koha package repository signing key
   apt_key:
     keyserver: "{{ koha_keyserver }}"

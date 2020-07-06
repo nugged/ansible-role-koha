@@ -15,6 +15,7 @@ koha_db_pass: CHANGE_ME
 koha_db_database: CHANGE_ME
 koha_db_hostname: CHANGE_ME
 koha_create_instance: false
+koha_server_timezone: UTC
 
 koha_sip_enable: false
 koha_sip_port: 6002
