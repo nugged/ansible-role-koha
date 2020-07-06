@@ -41,9 +41,18 @@
     - ssl
   register: apache_modules
 
+- name: Assign 'koha user exists' test variable
+  set_fact: koha_user_exists_error_message="User {{ koha_instance_name }}-koha already exists"
+  when: koha_create_instance|bool
+
 - name: Create Koha instance
   command: koha-create {{ koha_instance_name }} --use-db --database {{ koha_db_database }}
-  when: koha_create_instance
+  register: koha_create_result
+  failed_when: 
+    - koha_create_result.rc != 0
+    - 'koha_user_exists_error_message not in koha_create_result.stderr'
+  changed_when: "koha_user_exists_error_message not in koha_create_result.stderr"
+  when: koha_create_instance|bool
 
 - name: Configure koha-conf.xml
   template:
