@@ -120,7 +120,7 @@
 
 - name: Install translations
   command: "MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE=koha_ koha-translate --install {{ item }}"
-  when: "{{ item }} not in koha_languages.stdout"
+  when: "{{ item }} not in koha_installed_languages.stdout"
   with_items: "{{ koha_languages }}"
 
   # TODO: might be another action for "update" if installed:
