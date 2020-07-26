@@ -19,6 +19,7 @@ koha_server_timezone: UTC
 koha_languages:
   - fi-FI
   - sv-SE
+koha_memcached_ns_prefix: koha_
 
 koha_sip_enable: false
 koha_sip_port: 6002

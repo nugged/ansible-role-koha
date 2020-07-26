@@ -114,12 +114,12 @@
   when: apache_modules.changed or koha_plack_result.changed or apache_conf.changed
 
 - name: Check for installed translations
-  command: MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE=koha_ koha-translate --list
+  command: MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE={{ koha_memcached_ns_prefix }}{{ koha_instance_name }} koha-translate --list
   register: koha_installed_languages
   changed_when: False
 
 - name: Install translations
-  command: "MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE=koha_ koha-translate --install {{ item }}"
+  command: "MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE={{ koha_memcached_ns_prefix }}{{ koha_instance_name }} koha-translate --install {{ item }}"
   when: "{{ item }} not in koha_installed_languages.stdout"
   with_items: "{{ koha_languages }}"
 
