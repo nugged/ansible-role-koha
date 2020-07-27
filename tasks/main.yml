@@ -47,7 +47,7 @@
 - name: Create Koha instance
   command: koha-create {{ koha_instance_name }} --use-db --database {{ koha_db_database }}
   register: koha_create_result
-  failed_when: 
+  failed_when:
     - koha_create_result.rc != 0
     - 'koha_user_exists_error_message not in koha_create_result.stderr'
   changed_when: "koha_user_exists_error_message not in koha_create_result.stderr"
@@ -114,15 +114,20 @@
   when: apache_modules.changed or koha_plack_result.changed or apache_conf.changed
 
 - name: Check for installed translations
-  command: MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE={{ koha_memcached_ns_prefix }}{{ koha_instance_name }} koha-translate --list
+  command: "koha-translate --list"
+  environment:
+    MEMCACHED_SERVERS: '127.0.0.1:11211'
+    MEMCACHED_NAMESPACE: '{{ koha_memcached_ns_prefix }}{{ koha_instance_name }}'
   register: koha_installed_languages
+  failed_when: koha_installed_languages.stderr != ''
   changed_when: False
 
 - name: Install translations
-  command: "MEMCACHED_SERVERS=127.0.0.1:11211 MEMCACHED_NAMESPACE={{ koha_memcached_ns_prefix }}{{ koha_instance_name }} koha-translate --install {{ item }}"
-  when: "{{ item }} not in koha_installed_languages.stdout"
   with_items: "{{ koha_languages }}"
-
-  # TODO: might be another action for "update" if installed:
-  # koha-translate --update fi-FI
-
+  command: "koha-translate --install {{ item }}"
+  environment:
+    MEMCACHED_SERVERS: '127.0.0.1:11211'
+    MEMCACHED_NAMESPACE: '{{ koha_memcached_ns_prefix }}{{ koha_instance_name }}'
+  register: koha_languages_install
+  failed_when: koha_languages_install.stderr != ''
+  when: item not in koha_installed_languages.stdout
