@@ -7,6 +7,10 @@
   Define instance "{{ koha_instance_name }}"
 
   Include /etc/koha/apache-shared.conf
+
+  ProxyPass "/cgi-bin/koha/opac/oai.pl" "!"
+  ScriptAlias /cgi-bin/koha/opac/oai.pl "/usr/share/koha/opac/cgi-bin/opac/oai.pl"
+
   Include /etc/koha/apache-shared-intranet-plack.conf
   Include /etc/koha/apache-shared-intranet.conf
 
