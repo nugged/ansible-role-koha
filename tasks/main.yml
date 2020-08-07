@@ -26,6 +26,7 @@
   lineinfile:
     path: /etc/hosts
     line: "127.0.1.1 {{ koha_domain }}"
+    insertafter: '127\.0\.0\.1 localhost'
     state: present
 
 - name: Enable required Apache modules
