@@ -2,6 +2,16 @@
   timezone:
     name: "{{ koha_server_timezone }}"
 
+- name: Check to have {{ koha_domain }} domain in /etc/hosts
+  become: yes
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.1.1 {{ koha_domain }}"
+    insertafter: '127\.0\.0\.1 localhost'
+    state: present
+
+
+
 - name: Add Koha package repository signing key
   apt_key:
     keyserver: "{{ koha_keyserver }}"
@@ -20,14 +30,6 @@
   loop:
     - koha-common
     - koha-elasticsearch
-
-- name: Check to have {{ koha_domain }} domain in /etc/hosts
-  become: yes
-  lineinfile:
-    path: /etc/hosts
-    line: "127.0.1.1 {{ koha_domain }}"
-    insertafter: '127\.0\.0\.1 localhost'
-    state: present
 
 - name: Enable required Apache modules
   apache2_module:
