@@ -130,4 +130,4 @@
     MEMCACHED_NAMESPACE: '{{ koha_memcached_ns_prefix }}{{ koha_instance_name }}'
   register: koha_languages_install
   failed_when: koha_languages_install.stderr != ''
-  when: item not in koha_installed_languages.stdout
+  when: koha_installed_languages is defined and item not in koha_installed_languages.stdout
