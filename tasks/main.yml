@@ -43,9 +43,11 @@
     - ssl
   register: apache_modules
 
+
+
 - name: Assign 'koha user exists' test variable
   set_fact: koha_user_exists_error_message="User {{ koha_instance_name }}-koha already exists"
-  when: koha_create_instance|bool
+  when: koha_create_instance | bool
 
 - name: Create Koha instance
   command: koha-create {{ koha_instance_name }} --use-db --database {{ koha_db_database }}
@@ -54,7 +56,7 @@
     - koha_create_result.rc != 0
     - 'koha_user_exists_error_message not in koha_create_result.stderr'
   changed_when: "koha_user_exists_error_message not in koha_create_result.stderr"
-  when: koha_create_instance|bool
+  when: koha_create_instance | bool
 
 - name: Configure koha-conf.xml
   template:
@@ -72,6 +74,8 @@
     - koha_plack_result.rc != 0
     - '"Plack already enabled for" not in koha_plack_result.stderr'
   changed_when: '"Plack already enabled for" not in koha_plack_result.stderr'
+
+
 
 - name: Configure apache2
   template:
@@ -98,6 +102,8 @@
   changed_when: '"SIP server already enabled" not in koha_sip_result.stdout'
   when: koha_sip_enable
 
+
+
 - name: Restart koha-common
   systemd:
     state: restarted
@@ -115,6 +121,8 @@
     name: apache2
     state: restarted
   when: apache_modules.changed or koha_plack_result.changed or apache_conf.changed
+
+
 
 - name: Check for installed translations
   command: "koha-translate --list"
