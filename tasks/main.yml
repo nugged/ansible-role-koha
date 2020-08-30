@@ -18,6 +18,11 @@
     id: "{{ koha_signing_key_id }}"
   when: koha_signing_key_id is defined and koha_signing_key_id|length > 0
 
+- name: Add primary repository signing key by content
+  apt_key:
+    data: "{{ koha_signing_key_content }}"
+  when: koha_signing_key_content is defined and koha_signing_key_content|length > 0
+
 - name: Add primary repository
   apt_repository:
     repo: "{{ koha_package_repository }}"
