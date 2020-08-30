@@ -29,6 +29,25 @@
     state: present
     filename: koha-primary
 
+- name: Add secondary package repository signing key
+  apt_key:
+    keyserver: "{{ koha_secondary_keyserver }}"
+    id: "{{ koha_secondary_signing_key_id }}"
+  when: 
+   - koha_secondary_signing_key_id is defined and koha_secondary_signing_key_id|length > 0
+   - koha_secondary_keyserver is defined and koha_secondary_keyserver|length > 0
+
+- name: Add secondary repository signing key by content
+  apt_key:
+    data: "{{ koha_secondary_signing_key_content }}"
+  when: koha_secondary_signing_key_content is defined and koha_secondary_signing_key_content|length > 0
+
+- name: Add secondary repository
+  apt_repository:
+    repo: "{{ koha_secondary_package_repository }}"
+    state: present
+    filename: koha-secondary
+
 - name: Install Koha packages
   package:
     name: "{{ item }}"
@@ -36,6 +55,8 @@
   loop:
     - koha-common
     - koha-elasticsearch
+
+
 
 - name: Enable required Apache modules
   apache2_module:
