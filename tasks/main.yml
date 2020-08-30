@@ -12,10 +12,11 @@
 
 
 
-- name: Add Koha package repository signing key
+- name: Add primary repository signing key
   apt_key:
     keyserver: "{{ koha_keyserver }}"
     id: "{{ koha_signing_key_id }}"
+  when: koha_signing_key_id is defined and koha_signing_key_id|length > 0
 
 - name: Add Koha package repository
   apt_repository:
