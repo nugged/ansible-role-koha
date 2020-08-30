@@ -18,11 +18,11 @@
     id: "{{ koha_signing_key_id }}"
   when: koha_signing_key_id is defined and koha_signing_key_id|length > 0
 
-- name: Add Koha package repository
+- name: Add primary repository
   apt_repository:
     repo: "{{ koha_package_repository }}"
     state: present
-    filename: koha-packages
+    filename: koha-primary
 
 - name: Install Koha packages
   package:
