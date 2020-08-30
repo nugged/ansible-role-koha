@@ -48,6 +48,15 @@
     state: present
     filename: koha-secondary
 
+- name: Configure pinning for koha-common
+  template:
+    src: pin-koha.j2
+    dest: /etc/apt/preferences.d/koha
+    owner: root
+    group: root
+    mode: u=rw,g=r
+  when: koha_secondary_package_rep_domain is defined and koha_secondary_package_rep_domain|length > 0
+
 - name: Install Koha packages
   package:
     name: "{{ item }}"
