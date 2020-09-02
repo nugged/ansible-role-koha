@@ -12,6 +12,8 @@ supports Elasticsearch as the search engine.
 * ```koha_signing_key_id``` - PGP key used to verify packages
 * ```koha_keyserver``` - PGP keyserver to use
 * ```koha_package_repository``` - The Debian package repository to use
+* ```koha_index_config``` - Path of custom elasticsearch index configuration file
+* ```koha_index_mappings``` - Path of custom elasticsearch mappings configuration file
 
 ## License
 

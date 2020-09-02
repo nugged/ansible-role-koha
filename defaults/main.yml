@@ -16,6 +16,8 @@ koha_db_database: CHANGE_ME
 koha_db_hostname: CHANGE_ME
 koha_create_instance: false
 koha_server_timezone: UTC
+koha_index_mappings: ""
+koha_index_config: ""
 koha_languages:
   - fi-FI
   - sv-SE

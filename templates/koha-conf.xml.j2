@@ -58,6 +58,8 @@
    <server>{{ koha_elasticsearch_server }}:9200</server>
    <index_name>koha_{{ koha_instance_name }}</index_name>
   </elasticsearch>
+  <elasticsearch_index_mappings>{{ koha_index_mappings }}</elasticsearch_index_mappings>
+  <elasticsearch_index_config>{{ koha_index_config }}</elasticsearch_index_config>
   <timezone></timezone>
   <dev_install>0</dev_install>
   <strict_sql_modes>0</strict_sql_modes>
