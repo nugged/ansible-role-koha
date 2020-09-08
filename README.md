@@ -14,6 +14,10 @@ supports Elasticsearch as the search engine.
 * ```koha_package_repository``` - The Debian package repository to use
 * ```koha_index_config``` - Path of custom elasticsearch index configuration file
 * ```koha_index_mappings``` - Path of custom elasticsearch mappings configuration file
+* ```koha_custom_index_mappings``` - Whether to use custom template file for elasticsearch index mappings
+* ```koha_custom_index_config``` - Whether to use custom template file for elasticsearch index config
+* ```koha_custom_z3950_pqf_properties``` - Whether to use custom template file for Z39.50 pqf properties
+* ```koha_custom_z3950_attributes``` - Whether to use custom template file for Z39.50 attributes mappings
 
 ## License
 
