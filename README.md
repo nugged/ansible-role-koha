@@ -18,6 +18,7 @@ supports Elasticsearch as the search engine.
 * ```koha_custom_index_config``` - Whether to use custom template file for elasticsearch index config
 * ```koha_custom_z3950_pqf_properties``` - Whether to use custom template file for Z39.50 pqf properties
 * ```koha_custom_z3950_attributes``` - Whether to use custom template file for Z39.50 attributes mappings
+* ```koha_custom_oai_pmh``` - Whether to use custom template file for OAI-PMH settings
 
 ## License
 

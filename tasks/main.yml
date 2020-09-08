@@ -130,6 +130,15 @@
     mode: u=rw,g=r
   when: koha_custom_z3950_attributes
 
+- name: Configure OAI-PMH settings
+  template:
+    src: oai.conf.j2
+    dest: /etc/koha/sites/{{ koha_instance_name }}/oai.conf
+    owner: root
+    group: "{{ koha_instance_name }}-koha"
+    mode: u=rw,g=r
+  when: koha_custom_oai_pmh
+
 - name: Configure koha-conf.xml
   template:
     src: koha-conf.xml.j2
