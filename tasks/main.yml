@@ -121,6 +121,9 @@
     mode: u=rw,g=r
   when: koha_custom_index_config
 
+- name: Create z3950 directory
+  file: path=/etc/koha/sites/{{ koha_instance_name }}/z3950 state=directory mode=0755
+
 - name: Configure Z39.50 pqf properties settings
   template:
     src: pqf.properties.j2
