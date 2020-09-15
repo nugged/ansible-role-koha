@@ -27,6 +27,7 @@ koha_custom_index_config: false
 koha_custom_z3950_pqf_properties: false
 koha_custom_z3950_attributes: false
 koha_custom_oai_pmh: false
+koha_custom_daily_crons: true
 
 koha_sip_enable: false
 koha_sip_port: 6002

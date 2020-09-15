@@ -57,6 +57,15 @@
     mode: u=rw,g=r
   when: koha_secondary_package_rep_domain is defined and koha_secondary_package_rep_domain|length > 0
 
+- name: Configure custom daily crons
+  template:
+    src: koha-daily-crons.j2
+    dest: /etc/cron.daily/koha-daily-crons
+    owner: root
+    group: root
+    mode: u=rw,g=r
+  when: koha_custom_daily_crons
+
 - name: Install Koha packages
   package:
     name: "{{ item }}"
