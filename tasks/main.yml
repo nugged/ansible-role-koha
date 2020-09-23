@@ -130,7 +130,7 @@
     dest: /etc/koha/sites/{{ koha_instance_name }}/z3950/pqf.properties
     owner: root
     group: "{{ koha_instance_name }}-koha"
-    mode: u=rw,g=r
+    mode: u=rw,g=r,o=r
   when: koha_custom_z3950_pqf_properties
 
 - name: Configure Z39.50 attribute mappings settings
@@ -139,7 +139,7 @@
     dest: /etc/koha/sites/{{ koha_instance_name }}/z3950/attribute_mappings.yaml
     owner: root
     group: "{{ koha_instance_name }}-koha"
-    mode: u=rw,g=r
+    mode: u=rw,g=r,o=r
   when: koha_custom_z3950_attributes
 
 - name: Configure OAI-PMH settings
