@@ -64,7 +64,7 @@
     owner: root
     group: root
     mode: u=rw,g=r
-  when: koha_custom_daily_crons
+  when: koha_custom_daily_crons | bool
 
 - name: Install Koha packages
   package:
