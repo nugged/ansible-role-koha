@@ -19,7 +19,10 @@ supports Elasticsearch as the search engine.
 * ```koha_custom_z3950_pqf_properties``` - Whether to use custom template file for Z39.50 pqf properties
 * ```koha_custom_z3950_attributes``` - Whether to use custom template file for Z39.50 attributes mappings
 * ```koha_custom_oai_pmh``` - Whether to use custom template file for OAI-PMH settings
-* ```koha_custom_daily_crons``` - Whether to use custom daily cronjobs
+* ```koha_override_hourly_crons``` - Whether to override hourly cronjobs
+* ```koha_override_daily_crons``` - Whether to override daily cronjobs
+* ```koha_override_monthly_crons``` - Whether to override monthly cronjobs
+* ```koha_override_koha_crons``` - Whether to override koha cronjobs
 
 ## License
 

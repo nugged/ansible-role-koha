@@ -57,14 +57,41 @@
     mode: u=rw,g=r
   when: koha_secondary_package_rep_domain is defined and koha_secondary_package_rep_domain|length > 0
 
-- name: Configure custom daily crons
+- name: Override Koha hourly crons
   template:
-    src: koha-daily-crons.j2
-    dest: /etc/cron.daily/koha-daily-crons
+    src: koha-common-hourly.j2
+    dest: /etc/cron.hourly/koha-common
     owner: root
     group: root
-    mode: u=rw,g=r
-  when: koha_custom_daily_crons | bool
+    mode: u=rwx,g=rx,o=rx
+  when: koha_override_hourly_crons | bool
+
+- name: Override Koha daily crons
+  template:
+    src: koha-common-daily.j2
+    dest: /etc/cron.daily/koha-common
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  when: koha_override_daily_crons | bool
+
+- name: Override Koha monthly crons
+  template:
+    src: koha-common-monthly.j2
+    dest: /etc/cron.monthly/koha-common
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  when: koha_override_monthly_crons | bool
+
+- name: Override /etc/cron.d/koha-common crons
+  template:
+    src: koha-common-crons.j2
+    dest: /etc/cron.d/koha-common
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  when: koha_override_koha_crons | bool
 
 - name: Install Koha packages
   package:
