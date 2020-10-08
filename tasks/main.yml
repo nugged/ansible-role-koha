@@ -169,6 +169,20 @@
     mode: u=rw,g=r,o=r
   when: koha_custom_z3950_attributes
 
+- name: Configure Z39.50 settings
+  template:
+    src: z3950_config.xml.j2
+    dest: /etc/koha/sites/{{ koha_instance_name }}/z3950/config.xml
+    owner: root
+    group: "{{ koha_instance_name }}-koha"
+    mode: u=rw,g=r,o=r
+  when: koha_custom_z3950_config | bool
+
+- name: Allow reading log4perl.conf for everybody (Z39.50 needs it)
+  file:
+    path: /etc/koha/sites/{{ koha_instance_name }}/log4perl.conf
+    mode: u=rw,g=r,o=r
+
 - name: Configure OAI-PMH settings
   template:
     src: oai.conf.j2
