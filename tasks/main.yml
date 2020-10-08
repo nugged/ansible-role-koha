@@ -206,6 +206,15 @@
     mode: u=rw,g=r
   register: apache_conf
 
+- name: Configure apache2 ports
+  template:
+    src: apache-ports.conf.j2
+    dest: /etc/apache2/ports.conf
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  register: apache_ports_conf
+
 - name: Configure SIPconfig.xml
   template:
     src: SIPconfig.xml.j2
@@ -240,7 +249,13 @@
   systemd:
     name: apache2
     state: restarted
-  when: apache_modules.changed or koha_plack_result.changed or apache_conf.changed
+  when: apache_modules.changed or koha_plack_result.changed
+
+- name: Reload Apache
+  systemd:
+    name: apache2
+    state: reloaded
+  when: apache_conf.changed or apache_ports_conf.changed
 
 
 
