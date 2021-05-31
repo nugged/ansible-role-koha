@@ -101,6 +101,12 @@
     - koha-common
     - koha-elasticsearch
 
+- name: Install mariadb-backup package
+  package:
+    name: mariadb-backup
+    state: present
+  when: mysql_enable_backups is defined and mysql_enable_backups
+
 
 
 - name: Enable required Apache modules
