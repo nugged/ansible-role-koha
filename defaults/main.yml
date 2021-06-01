@@ -18,6 +18,7 @@ koha_create_instance: false
 koha_server_timezone: UTC
 koha_index_mappings: ""
 koha_index_config: ""
+koha_field_config: ""
 koha_languages:
   - fi-FI
   - sv-SE

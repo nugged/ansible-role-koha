@@ -13,6 +13,7 @@ supports Elasticsearch as the search engine.
 * ```koha_keyserver``` - PGP keyserver to use
 * ```koha_package_repository``` - The Debian package repository to use
 * ```koha_index_config``` - Path of custom elasticsearch index configuration file
+* ```koha_field_config``` - Path of custom elasticsearch field configuration file
 * ```koha_index_mappings``` - Path of custom elasticsearch mappings configuration file
 * ```koha_custom_index_mappings``` - Whether to use custom template file for elasticsearch index mappings
 * ```koha_custom_index_config``` - Whether to use custom template file for elasticsearch index config
