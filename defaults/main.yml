@@ -25,6 +25,7 @@ koha_languages:
 koha_memcached_ns_prefix: koha_
 koha_custom_index_mappings: false
 koha_custom_index_config: false
+koha_custom_field_config: false
 koha_custom_z3950_pqf_properties: false
 koha_custom_z3950_attributes: false
 koha_custom_z3950_config: false

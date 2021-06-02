@@ -148,6 +148,15 @@
     mode: u=rw,g=r
   when: koha_custom_index_config
 
+- name: Configure Elasticsearch field config
+  template:
+    src: field_config.yaml.j2
+    dest: /etc/koha/sites/{{ koha_instance_name }}/field_config.yaml
+    owner: root
+    group: "{{ koha_instance_name }}-koha"
+    mode: u=rw,g=r
+  when: koha_custom_field_config
+
 - name: Create z3950 directory
   file: path=/etc/koha/sites/{{ koha_instance_name }}/z3950 state=directory mode=0755
 
